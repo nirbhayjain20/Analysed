@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 if (isset($_POST['next']))
@@ -20,7 +20,7 @@ if (isset($_POST['next']))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-	
+
 <?php include('../navMenu.php')?>
         <div class="row-signup hero-section-justify-content max-width-row">
             <div class="left-side-flex-container-signup">
@@ -29,7 +29,7 @@ if (isset($_POST['next']))
                 </p>
                 <p class="progress-bar-signup"><span></span></p>
                 <p class="personal-details-heading">Personal details</p>
-  
+
  </span>
  <form action="" method="post">
                     <div class="row-signup input-section-row">
@@ -268,12 +268,12 @@ if (isset($_POST['next']))
                         <div class="input-signup-div">
                             <label for="input-first-name">Password<span>*</span></label>
                             <input type="password" name="password" placeholder="Password" id="input-first-name" required>
-                       
+
                         </div>
                         <div class="input-signup-div">
                             <label for="input-first-name">Confirm Password<span>*</span></label>
                             <input type="password" name="password1" placeholder="Confirm Password" id="input-first-name" required>
-                       
+
                         </div>
                         <div class="input-signup-div address">
                             <label for="input-first-name">Address<span>*</span></label>
@@ -287,7 +287,7 @@ if (isset($_POST['next']))
                 <img src="../images/recruiter.svg" alt="">
             </div>
         </div>
-        
+
     </div>
 </div>
 
