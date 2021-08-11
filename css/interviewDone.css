@@ -52,10 +52,13 @@
 .candidate-status-jobs.Unfinished{
     background: #D7D7D7;
 }
-@media screen and (max-width:1120px){
-    .jobStatus-interviewDone.active{
-        margin-left: 0px;
-        margin-top: 10px;
-        width: 100%;
-    }
+.candidate-status-jobs.Active {
+    background: #FDE8E2;
 }
+    @media screen and (max-width:1120px) {
+        .jobStatus-interviewDone.active {
+            margin-left: 0px;
+            margin-top: 10px;
+            width: 100%;
+        }
+    }
