@@ -34,7 +34,7 @@ a {
 /* Navigation bar */
 
 .navigation-bar-signup {
-  margin-top: 39px;
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,7 +75,7 @@ a {
   color: #3598db;
   font-family: Metro;
   font-size: 30px;
-  margin: 15px 0px;
+  margin: 0px 0px;
   font-weight: 800;
 }
 .progress-bar-signup {
@@ -103,6 +103,7 @@ a {
   flex-basis: 45%;
   width: 100%;
 }
+
 .input-signup-div label {
   display: block;
   font-size: #333333;
@@ -117,7 +118,7 @@ a {
   background: #fafbff;
   color: #333333;
   padding: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   width: 100%;
 }
 .input-signup-div.address {
@@ -131,8 +132,7 @@ a {
   border: 1px solid #d7d7d7;
   color: #979797;
   padding: 10px;
-  margin-bottom: 30px;
-  border-right: none;
+  margin-bottom: 20px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -148,13 +148,15 @@ a {
   opacity: 1;
   border: none;
   outline: none;
+  padding: 10px 10px;
   /* padding: 40px 24px; */
   cursor: pointer;
   color: white;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 .phn-number--input-signup {
   width: 80% !important;
+  
 }
 .navigation-menu-signup {
   display: none;
@@ -250,3 +252,4 @@ a {
     flex-basis: 100%;
   }
 }
+
