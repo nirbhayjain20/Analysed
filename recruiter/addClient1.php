@@ -1,4 +1,27 @@
-<?php include('header.php')?>
+<?php
+
+    session_start();
+
+    if(isset($_POST['next'])){
+        foreach ($_POST as $key => $value)
+        {
+            $_SESSION['info'][$key] = $value;
+        }
+     
+        $keys = array_keys($_SESSION['info']);
+     
+        if(in_array('next', $keys)){
+            unset($_SESSION['info']['next']);
+        }
+ 
+        header("Location: addClient2.php");
+     } 
+ 
+
+?>
+
+<?php include('header.php');?>
+
 <link rel="stylesheet" href="./css/addClient.css">
 <title>Analysed</title>
 <div class="container">
@@ -10,31 +33,32 @@
             <h1 class="mainHeadingDash">Add Client</h1>
             <p class="mainParaDash">Fill in the details to create a new client.</p>
         </div>
-        <button class="save_button_addClient default-button-for-recruiter-dashboard">Save</button>
+        <!-- <button class="save_button_addClient default-button-for-recruiter-dashboard">Save</button> -->
         <div class="row-recruiter container-for-add-client-main">
             <div class="left-side-row-for-add-client-container-1">
-                <p class="links-for-add-client-low-side-row-for-add-client active" id="link-categories-addClient-1"><a href="">General info</a></p>
-                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-2"><a href="" class="active">Contact info</a></p>
-                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-3"><a href="">Billing info</a></p>
+                <p class="links-for-add-client-low-side-row-for-add-client active" id="link-categories-addClient-1"><a href="addClient.php">General info</a></p>
+                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-2"><a href="addClient1.php" class="active">Contact info</a></p>
+                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-3"><a href="addClient2.php">Billing info</a></p>
             </div>
+        <form action="" method="post">
             <div class="right-side-row-for-add-client-container-1" id="contact-info-addclient-1">
                 <h2 class="heading-for-general-information-right-side-add-client-container-1"><i class="fa fa-building" aria-hidden="true"></i> Contact information</h2>
                 <div class="row-recruiter inputs-for-add-client-below-image-box">    
                     <p class="input-para-add-client-ekam-1"> 
                             <label for="default-select-for-no.11">Main Email</label>
-                            <input id="default-select-for-no.11" name="mainemail"type="email" class="default-input-for-add-client-1"placeholder="Enter mail email id">
+                            <input id="default-select-for-no.11" name="mainemail"type="email" class="default-input-for-add-client-1"placeholder="Enter mail email id" required />
                         </p>
                         <p class="input-para-add-client-ekam-1"> 
                             <label for="default-select-for-no.12">Contact number</label>
-                            <input id="default-select-for-no.12" type="tel" name="Contact number" class="default-input-for-add-client-1" placeholder="Enter 10 digit mobile number">
+                            <input id="default-select-for-no.12" type="tel" name="Contact_number" class="default-input-for-add-client-1" placeholder="Enter 10 digit mobile number" required />
                     </p>
                     <p class="input-para-add-client-ekam-1"> 
                             <label for="default-select-for-no.13">Address</label>
-                            <input id="default-select-for-no.13" type="text" name="Address" class="default-input-for-add-client-1" placeholder="Enter your address">
+                            <input id="default-select-for-no.13" type="text" name="Address" class="default-input-for-add-client-1" placeholder="Enter your address" required /> 
                     </p>
                     <p class="input-para-add-client-ekam-1 fx-city-name"> 
                             <label for="default-select-for-no.13">City name</label>
-                            <input id="default-select-for-no.13" name="City name" type="text" class="default-input-for-add-client-1" placeholder="Enter your city name">
+                            <input id="default-select-for-no.13" name="Cityname" type="text" class="default-input-for-add-client-1" placeholder="Enter your city name">
                     </p>
                     <p class="input-para-add-client-ekam-1 fx-zipcode"> 
                             <label for="default-select-for-no.13">Zipcode</label>
@@ -43,23 +67,25 @@
                     <p class="select-for-select-image-box-below-inputs"> 
                         <label for="default-select-for-no.6">State</label>
                             <select name="State" id="default-select-for-no.6" class="default-select-for-add-client-1">
-                                <option value="0" default>Andhra Pradesh</option>
-                                <option value="1">Open</option>
-                                <option value="2">Closed</option>
-                                <option value="3">Working</option>
+                                <option value="" default>Andhra Pradesh</option>
+                                <option value="Open">Open</option>
+                                <option value="Closed">Closed</option>
+                                <option value="Working">Working</option>
                             </select>
                     </p>
                     <p class="select-for-select-image-box-below-inputs"> 
                         <label for="default-select-for-no.6">Country</label>
                             <select name="Country" id="default-select-for-no.6" class="default-select-for-add-client-1">
-                                <option value="0" default>India</option>
-                                <option value="1">Open</option>
-                                <option value="2">Closed</option>
-                                <option value="3">Working</option>
+                                <option value="" default>India</option>
+                                <option value="Open">Open</option>
+                                <option value="Closed">Closed</option>
+                                <option value="Working">Working</option>
                             </select>
                     </p>
+                    <input type = "submit" name="next"  class="save_button_addClient default-button-for-recruiter-dashboard" value="next" >
                 </div>
             </div>
+        </form> 
         </div>
     </div>
     </div>

@@ -1,3 +1,31 @@
+<?php
+    session_start();
+    
+    if(isset($_POST['next'])){
+        foreach ($_POST as $key => $value)
+        {
+            $_SESSION['info'][$key] = $value;
+        }
+     
+        $keys = array_keys($_SESSION['info']);
+     
+        if(in_array('next', $keys)){
+            unset($_SESSION['info']['next']);
+        }
+        
+        $file_name = $_FILES['image-file']['name'];
+        $file_type = $_FILES['image-file']['type'];
+        $file_size = $_FILES['image-file']['size'];
+        $file_tem_loc = $_FILES['image-file']['tmp_name'];
+        $file_store = "dp/".$file_name;
+
+        move_uploaded_file($file_tem_loc,$file_store);
+
+        header("Location: addCandidates2.php");
+     } 
+ 
+
+?>
 <?php include('header.php')?>
 <link rel="stylesheet" href="./css/addClient.css">
 <link rel="stylesheet" href="./css/addCandidates1.css">
@@ -12,13 +40,13 @@
             <h1 class="mainHeadingDash">Add Candidate</h1>
             <p class="mainParaDash">Please enter the details of the new candidates</p>
         </div>
-        <button class="save_button_addClient default-button-for-recruiter-dashboard">Save</button>
+        <!-- <button class="save_button_addClient default-button-for-recruiter-dashboard">Save</button> -->
         <div class="row-recruiter container-for-add-client-main">
             <div class="left-side-row-for-add-client-container-1">
-                <p class="links-for-add-client-low-side-row-for-add-client active" id="link-categories-addClient-1"><a href="" class="active">Personal infromation</a></p>
-                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-2"><a href="">Professional infromation</a></p>
-                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-3"><a href="">Skills & Qualification</a></p>
-                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-3"><a href="">Additional information</a></p>
+                <p class="links-for-add-client-low-side-row-for-add-client active" id="link-categories-addClient-1"><a href="addCandidates1.php" class="active">Personal infromation</a></p>
+                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-2"><a href="addCandidates2.php">Professional infromation</a></p>
+                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-3"><a href="addCandidates3.php">Skills & Qualification</a></p>
+                <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addClient-3"><a href="addCandidates4.php">Additional information</a></p>
             </div>
             <div class="right-side-row-for-add-client-container-1" id="general-information-addclient-1">
                 <div class="row-recruiter sub-divs-image-box-right-side-add-client">
@@ -26,41 +54,43 @@
                 <img src="./img/user.svg" width="50px" style="margin-right: 30px;">
                     <h2 class="heading-for-general-information-right-side-add-client-container">Personal information</h2>
                 </div>
-                    <div class="row-recruiter image-box-right-side-add-client">
+                   
+
+                    </div>
+                </div>
+                <form action="" method="post">
+                <div class="row-recruiter image-box-right-side-add-client">
                         <div class="left-side-image-box-add-client-1">
                             <div class="sub-divs-image-box-right-side-add-client">
-                                <input type="file" name="image-file" class="input-image-upload-ekam-1-add-client" id="input-image-upload-ekam-1-add-client">
+                                <input type="file" name="image-file" class="input-image-upload-ekam-1-add-client" id="input-image-upload-ekam-1-add-client" />
                                 <label class="label-for-image-upload-ekam-1client" for="input-image-upload-ekam-1-add-client">
                                     <h2><i class="" aria-hidden="true"></i></h2>
                                     <p class="position-absolute-image-upload-e"><i class="fa fa-camera" aria-hidden="true"></i></p>
                                 </label>
                             </div>
                         </div>
-
-                    </div>
-                </div>
                 <div class="row-recruiter inputs-for-add-client-below-image-box">
                     <div class="right-side-image-box-right-add-client-1">
                                 <div class="row-recruiter sub-divs-image-box-right-side-add-client">
                                     <p class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-input-for-no.1">First Name*</label>
-                                        <input type="text" name="companyname" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1">
+                                        <input type="text" name="firstname" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" required />
                                     </p>
                                     <p class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-input-for-no.1">Last Name*</label>
-                                        <input type="text" name="companyname" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1">
+                                        <input type="text" name="lastname" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" required />
                                     </p>
                                     <p class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-input-for-no.1">Email-ID*</label>
-                                        <input type="email" name="companyname" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1">
+                                        <input type="email" name="emailid" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" required />
                                     </p>
                                     <div class="input-signup-div fx-city-name-1">
                                         <label for="input-first-name">Phone number</label>
-                                        <div class="phn-number-div row-signup"  style="flex-wrap: nowrap;"><select><option>+91</option></select><input type="tel" maxlength='10' name="Phone number" placeholder="Phone number" id="input-first-name" class="phn-number--input-signup"></div>
+                                        <div class="phn-number-div row-signup"  style="flex-wrap: nowrap;"><select name="code"><option value="+91">+91</option></select><input type="tel" maxlength='10' name="phonenumber" placeholder="Phone number" id="input-first-name" class="phn-number--input-signup"></div>
                                     </div>
                                     <p class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-input-for-no.1">Birth Date*</label>
-                                        <input type="date" name="companyname" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1">
+                                        <input type="date" name="birthdate" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" required />
                                     </p>
                                     <p class="select-for-select-image-box-below-inputs fx-city-name-1"> 
                                         <label for="default-select-for-no.3">Status</label>
@@ -73,7 +103,7 @@
                                     </p>
                                     <p class="input-para-add-client-ekam-1 ">
                                         <label for="default-input-for-no.2">Address*</label>
-                                        <input type="text" name="cURL" class="default-input-for-add-client-1" placeholder="Company URL" id="default-input-for-no.2">
+                                        <input type="text" name="address" class="default-input-for-add-client-1" placeholder="Address" id="default-input-for-no.2" required />
                                     </p>
                                     <p  class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-select-for-no.2">Country</label>
@@ -86,7 +116,7 @@
                                     </p>
                                     <p class="input-para-add-client-ekam-1  fx-city-name-1"> 
                                         <label for="default-select-for-no.13">City name</label>
-                                        <input id="default-select-for-no.13" name="City name" type="text" class="default-input-for-add-client-1" placeholder="Enter your city name">
+                                        <input id="default-select-for-no.13" name="cityname" type="text" class="default-input-for-add-client-1" placeholder="Enter your city name">
                                     </p>
                                     <p class="input-para-add-client-ekam-1  fx-city-name-1"> 
                                             <label for="default-select-for-no.13">Zipcode</label>
@@ -102,7 +132,9 @@
                                             </select>
                                     </p>
                                 </div>
+                                <input type = "submit" name = "next" class="save_button_addClient default-button-for-recruiter-dashboard" value="Save" >
                         </div>
+                    </form>
                     </div>
                 </div>
     </div>
