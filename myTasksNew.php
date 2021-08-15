@@ -1,11 +1,4 @@
-<?php
-session_start();
-include('db.php');
-include ('header.php')?>
-
- <!--Import Google Icon Font-->
-<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<!--Let browser know website is optimized for mobile-->
+<?php include ('header.php')?>
 <link rel="stylesheet" href="./css/myTasksNew.css">
 <div class="container">
         <div class="small_container" >
@@ -14,107 +7,69 @@ include ('header.php')?>
             </div>
             <div class="input-task-name-container row-myTasksNew">
                 <div class="input-div-myTasksNew">
-                <label>Tasks name</label>
-                    <select class="browser-default" id="task" onchange="filterMeals(),filtermeal(),filteringmeal()">
-                         <option value="">Choose your option</option>
-                           <?php
-                           $records = mysqli_query($db,"SELECT DISTINCT task FROM tasklisting ");
-                            while ($row = mysqli_fetch_array($records)){
-                           echo "<option value=" . $row['task'] . ">" . $row['task'] . "</option>";
-                            }
-                            ?>
-                    </select>  
-                    <button class="abs-button"><img src="./img/Icon ionic-ios-arrow-down.svg" alt=""></button>
+                    <label for="taskname">Task name</label>
+                    <input type="text" id="taskname">
+                    <button class="abs-button"><img src="./img/magnifying-glass.svg" alt=""></button>
                 </div>
                 <div class="input-div-myTasksNew">
-                <label>Company</label>
-                    <select class="browser-default" id="name" onchange="filterMeals(),filtermeal(),filteringmeal()">
-                         <option value="">Choose your option</option>
-                           <?php
-                           $records = mysqli_query($db,"SELECT DISTINCT name FROM tasklisting ");
-                            while ($row = mysqli_fetch_array($records)){
-                           echo "<option value=" . $row['name'] . ">" . $row['name'] . "</option>";
-                            }
-                            ?>
-                    </select>  
-                    <button class="abs-button"><img src="./img/Icon ionic-ios-arrow-down.svg" alt=""></button>
-                </div>
-
-                <div class="input-div-myTasksNew">
-                <label>Job</label>
-                     <select  class="browser-default" id="position" onchange="filterMeals(),filtermeal(),filteringmeal()">
-                         <option value="">Choose your option</option>
-                           <?php
-                           $records = mysqli_query($db,"SELECT DISTINCT position FROM tasklisting ");
-                            while ($row = mysqli_fetch_array($records)){
-                           echo "<option value=" . $row['position'] . ">" . $row['position'] . "</option>";
-                            }
-                            ?>
-
-                    </select>  
-                    <button class="abs-button"><img src="./img/Icon ionic-ios-arrow-down.svg" alt=""></button>   
-                </div>  
-                <div class="input-div-myTasksNew">
-                <label for="Sortby">Location</label>
-                      <select  class="browser-default" id="location" onchange="filterMeals(),filtermeal(),filteringmeal()">
-                         <option value="">Choose your option</option>
-                           <?php
-                           $records = mysqli_query($db,"SELECT DISTINCT location FROM tasklisting ");
-                            while ($row = mysqli_fetch_array($records)){
-                           echo "<option value=" . $row['location'] . ">" . $row['location'] . "</option>";
-                            }
-                            ?>
-
+                <label for="company">Company</label>
+                    <select name="company" id="company">
+                        <option value="0"></option>
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
                     </select>
                     <button class="abs-button"><img src="./img/Icon ionic-ios-arrow-down.svg" alt=""></button>
                 </div>
+                <div class="input-div-myTasksNew">
+                <label for="Job">Job</label>
+                    <select name="Job" id="Job">
+                        <option value="0"></option>
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                    </select>
+                    <button class="abs-button"><img src="./img/Icon ionic-ios-arrow-down.svg" alt=""></button>
+                </div>
+                <div class="input-div-myTasksNew">
+                <label for="Sortby">Sort by</label>
+                    <select name="Sortby" id="Sortby">
+                        <option value="0"></option>
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                    </select>
+                    <button class="abs-button"><img src="./img/Icon ionic-ios-arrow-down.svg" alt=""></button>
+                </div>
+                <div class="input-div-myTasksNew button">
+                    <label for="Sortby">&nbsp;</label>
+                    <button class="search-btn-tasks-new">Search</button>
+                </div>
             </div>
-
-
-             <div class="tasks-headings-name-container row-myTasksNew upcoming">
+            <div class="tasks-headings-name-container row-myTasksNew upcoming">
                 <div class="upcoming">
                     <div class="tasks-div-heading-child row-myTasksNew upcoming">
                         <p>Upcoming tasks</p>
-                        <span><?php	$id = $db->query("SELECT * FROM tasklisting WHERE c_date BETWEEN CURDATE() AND CURDATE()+10");
-                                        	echo $id->num_rows;?></span>             
+                        <span>10</span>
                     </div>
-                    
                     <div class="upcoming-tasks-container">
-                    <div id="displayHere">
-                        <?php
-  if ($mealresult = mysqli_query($db,"SELECT * FROM tasklisting WHERE c_date BETWEEN CURDATE() AND CURDATE()+10;")) {
-      while ($meal = mysqli_fetch_array($mealresult)) {
-        $Unfilteredname = $meal['name'];
-        $Unfilteredposition = $meal['position'];
-        $Unfilteredtask = $meal['task'];
-        $Unfilteredcompany_website = $meal['company_website'];
-        $Unfilteredstatus = $meal['status'];
-         $Unfilteredicon = $meal['icon'];
-          $Unfilteredlocation = $meal['location'];
-                
-             ?>
                         <div class="card-upcoming-task-main-1">
                             <div class="name-and-image row-myTasksNew">
-                            
-                                <img src="./img/<?php echo $Unfilteredicon;?>" style="width:45px;height:45px;">
+                                <img src="./img/Facbook.svg" alt="">
                                 <span class="name-and-website-myTasks">
-                                    <p><?php echo $Unfilteredname;
-                                     echo ("\t");
-                                    echo $Unfilteredposition;?></p>
-                                  
-                                    <span><?php echo $Unfilteredcompany_website;?></span>
-                                  
+                                    <p>Facebook iOS UI design</p>
+                                    <span>www.facebook.com</span>
                                 </span>
                             </div>
                             <div class="message-text-outline row-myTasksNew">
                                 <img src="./img/message-text-outline.svg" alt="">
-                                <span>Starts tomorrow</span>
+                                <span>Starts in 5 Days</span>
                             </div>
                             <div class="row-myTasksNew progressbar-parent ">
                                 <div class="progress-bar">
-                                    <span style="width:   <?php echo $Unfilteredstatus;?>%;"></span>
+                                    <span style="width: 0%;"></span>
                                 </div>
-                                <?php echo $Unfilteredstatus;?>
+                                <p>0%</p>
                             </div>
                             <div class="row-myTasksNew imagesfocard-1">
                                 <div class="images-bottom">
@@ -127,76 +82,89 @@ include ('header.php')?>
                                 <span class="new-tasks-bottom-one">5+</span>
                             </div>
                         </div>
-                         <?php
-      }
-    }  ?> 
+                        <div class="card-upcoming-task-main-1">
+                            <div class="name-and-image row-myTasksNew">
+                                <img src="./img/Facbook.svg" alt="">
+                                <span class="name-and-website-myTasks">
+                                    <p>Facebook iOS UI design</p>
+                                    <span>www.facebook.com</span>
+                                </span>
                             </div>
-                </div></div>
-         <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-      <script type="text/javascript" src="assets/js/materialize.js"></script>
-<script type="text/javascript">
-  function filterMeals(){
-        var name = document.getElementById('name').value;
-        var position = document.getElementById('position').value;
-           var task = document.getElementById('task').value;
-            var location = document.getElementById('location').value;
-
-       $.post('config/filterMeals.php', {name1:name,position1:position,task1:task,location1:location}, function(data){
-           $('#displayHere').html(data);
-        });      
-  }
-  
-    $(document).ready(function(){
-        $("#select-box").on('change',function(){
-            var value = $(this).val();
-            multiCheckKey = true;
-            
-            ajaxFilter('select-box.php', value, multiCheckKey);
-        });
-    });
-</script>
-
+                            <div class="message-text-outline row-myTasksNew">
+                                <img src="./img/message-text-outline.svg" alt="">
+                                <span>Starts in 5 Days</span>
+                            </div>
+                            <div class="row-myTasksNew progressbar-parent ">
+                                <div class="progress-bar">
+                                <span style="width: 0%;"></span>
+                                </div>
+                                <p>0%</p>
+                            </div>
+                            <div class="row-myTasksNew imagesfocard-1">
+                                <div class="images-bottom">
+                                    <img src="./img/Profile1.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                    <img src="./img/Profile4.png" alt="">
+                                    <img src="./img/Profile2.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                </div>
+                                <span class="new-tasks-bottom-one">5+</span>
+                            </div>
+                        </div>
+                        <div class="card-upcoming-task-main-1">
+                            <div class="name-and-image row-myTasksNew">
+                                <img src="./img/Facbook.svg" alt="">
+                                <span class="name-and-website-myTasks">
+                                    <p>Facebook iOS UI design</p>
+                                    <span>www.facebook.com</span>
+                                </span>
+                            </div>
+                            <div class="message-text-outline row-myTasksNew">
+                                <img src="./img/message-text-outline.svg" alt="">
+                                <span>Starts in 5 Days</span>
+                            </div>
+                            <div class="row-myTasksNew progressbar-parent ">
+                                <div class="progress-bar">
+                                <span style="width: 0%;"></span>
+                                </div>
+                                <p>0%</p>
+                            </div>
+                            <div class="row-myTasksNew imagesfocard-1">
+                                <div class="images-bottom">
+                                    <img src="./img/Profile1.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                    <img src="./img/Profile4.png" alt="">
+                                    <img src="./img/Profile2.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                </div>
+                                <span class="new-tasks-bottom-one">5+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="upcoming">
                     <div class="tasks-div-heading-child row-myTasksNew active">
                         <p>Active tasks</p>
-                        <span><?php	$id = $db->query("SELECT * FROM tasklisting WHERE c_date=CURDATE()");
-                                        	echo $id->num_rows;?></span></div>
-                         <div class="upcoming-tasks-container">
-                    <div id="displayhere">
-                        <?php
-  if ($mealresult = mysqli_query($db,"SELECT * FROM tasklisting WHERE c_date=CURDATE()")) {
-      while ($meal = mysqli_fetch_array($mealresult)) {
-        $Unfilteredname = $meal['name'];
-        $Unfilteredposition = $meal['position'];
-        $Unfilteredtask = $meal['task'];
-        $Unfilteredcompany_website = $meal['company_website'];
-        $Unfilteredstatus = $meal['status'];
-          $Unfilteredicon = $meal['icon'];
-           $Unfilteredlocation = $meal['location'];
-                
-             ?>
+                        <span>10</span>
+                    </div>
+                    <div class="upcoming-tasks-container">
                         <div class="card-upcoming-task-main-1">
                             <div class="name-and-image row-myTasksNew">
-                            
-                                <img src="./img/<?php echo $Unfilteredicon;?>" style="width:45px;height:45px;">
+                                <img src="./img/Facbook.svg" alt="">
                                 <span class="name-and-website-myTasks">
-                                    <p><?php echo $Unfilteredname;
-                                     echo ("\t");
-                                    echo $Unfilteredposition;?></p>
-                            
-                                    <span><?php echo $Unfilteredcompany_website;?></span>
+                                    <p>Facebook iOS UI design</p>
+                                    <span>www.facebook.com</span>
                                 </span>
                             </div>
                             <div class="message-text-outline row-myTasksNew">
                                 <img src="./img/message-text-outline.svg" alt="">
-                                <span>Ends Today</span>
+                                <span class="active">Starts in 5 Days</span>
                             </div>
                             <div class="row-myTasksNew progressbar-parent ">
                                 <div class="progress-bar">
-                                    <span style="width:   <?php echo $Unfilteredstatus;?>%;"></span>
+                                <span style="width: 50%;"></span>
                                 </div>
-                                <?php echo $Unfilteredstatus;?>
+                                <p>50%</p>
                             </div>
                             <div class="row-myTasksNew imagesfocard-1">
                                 <div class="images-bottom">
@@ -209,68 +177,89 @@ include ('header.php')?>
                                 <span class="new-tasks-bottom-one">5+</span>
                             </div>
                         </div>
-                         <?php
-      }
-    }  ?> 
+                        <div class="card-upcoming-task-main-1">
+                            <div class="name-and-image row-myTasksNew">
+                                <img src="./img/Facbook.svg" alt="">
+                                <span class="name-and-website-myTasks">
+                                    <p>Facebook iOS UI design</p>
+                                    <span>www.facebook.com</span>
+                                </span>
                             </div>
+                            <div class="message-text-outline row-myTasksNew">
+                                <img src="./img/message-text-outline.svg" alt="">
+                                <span class="active">Starts in 5 Days</span>
+                            </div>
+                            <div class="row-myTasksNew progressbar-parent ">
+                                <div class="progress-bar">
+                                    <span style="width: 20%;"></span>
+                                </div>
+                                <p>20%</p>
+                            </div>
+                            <div class="row-myTasksNew imagesfocard-1">
+                                <div class="images-bottom">
+                                    <img src="./img/Profile1.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                    <img src="./img/Profile4.png" alt="">
+                                    <img src="./img/Profile2.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                </div>
+                                <span class="new-tasks-bottom-one">5+</span>
+                            </div>
+                        </div>
+                        <div class="card-upcoming-task-main-1">
+                            <div class="name-and-image row-myTasksNew">
+                                <img src="./img/Facbook.svg" alt="">
+                                <span class="name-and-website-myTasks">
+                                    <p>Facebook iOS UI design</p>
+                                    <span>www.facebook.com</span>
+                                </span>
+                            </div>
+                            <div class="message-text-outline row-myTasksNew">
+                                <img src="./img/message-text-outline.svg" alt="">
+                                <span class="active">Starts in 5 Days</span>
+                            </div>
+                            <div class="row-myTasksNew progressbar-parent ">
+                                <div class="progress-bar">
+                                    <span style="width: 90%;"></span>
+                                </div>
+                                <p>90%</p>
+                            </div>
+                            <div class="row-myTasksNew imagesfocard-1">
+                                <div class="images-bottom">
+                                    <img src="./img/Profile1.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                    <img src="./img/Profile4.png" alt="">
+                                    <img src="./img/Profile2.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                </div>
+                                <span class="new-tasks-bottom-one">5+</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                </div>
-                         <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-      <script type="text/javascript" src="assets/js/materialize.js"></script>
-<script type="text/javascript">
-  function filtermeal(){
-        var name = document.getElementById('name').value;
-        var position = document.getElementById('position').value;
-            var task = document.getElementById('task').value;
-       var location = document.getElementById('location').value;
-
-       $.post('config/filtermeal.php', {name1:name,position1:position,task1:task,location1:location}, function(data){
-           $('#displayhere').html(data);
-        });      
-  }
-</script>
-
                 <div class="upcoming">
                     <div class="tasks-div-heading-child row-myTasksNew completed">
                         <p>Completed tasks</p>
-                        <span><?php	$id = $db->query("SELECT * FROM tasklisting WHERE c_date BETWEEN CURDATE()-10 AND CURDATE()");
-                                        	echo $id->num_rows;?></span></div>
-                          <div class="upcoming-tasks-container">
-                        <div id="displayhere1">
-                        <?php
-  if ($mealresult = mysqli_query($db,"SELECT * FROM tasklisting WHERE c_date BETWEEN CURDATE()-10 AND CURDATE();")) {
-      while ($meal = mysqli_fetch_array($mealresult)) {
-        $Unfilteredname = $meal['name'];
-        $Unfilteredposition = $meal['position'];
-        $Unfilteredtask = $meal['task'];
-        $Unfilteredcompany_website = $meal['company_website'];
-        $Unfilteredstatus = $meal['status'];
-          $Unfilteredicon = $meal['icon'];
-           $Unfilteredlocation = $meal['location'];
-                
-             ?>
+                        <span>10</span>
+                    </div>
+                    <div class="upcoming-tasks-container">
                         <div class="card-upcoming-task-main-1">
                             <div class="name-and-image row-myTasksNew">
-                            
-                                <img src="./img/<?php echo $Unfilteredicon;?>" style="width:45px;height:45px;">
+                                <img src="./img/Facbook.svg" alt="">
                                 <span class="name-and-website-myTasks">
-                                    <p><?php echo $Unfilteredname;
-                                     echo ("\t");
-                                    echo $Unfilteredposition;?></p>
-                            
-                                    <span><?php echo $Unfilteredcompany_website;?></span>
+                                    <p>Facebook iOS UI design</p>
+                                    <span>www.facebook.com</span>
                                 </span>
                             </div>
                             <div class="message-text-outline row-myTasksNew">
                                 <img src="./img/message-text-outline.svg" alt="">
-                                <span>Completed Yesterday</span>
+                                <span class="done">26 days ago</span>
                             </div>
                             <div class="row-myTasksNew progressbar-parent ">
                                 <div class="progress-bar">
-                                    <span style="width:   <?php echo $Unfilteredstatus;?>%;"></span>
+                                    <span style="width: 100%;"></span>
                                 </div>
-                                <?php echo $Unfilteredstatus;?>
+                                <p>100%</p>
                             </div>
                             <div class="row-myTasksNew imagesfocard-1">
                                 <div class="images-bottom">
@@ -283,31 +272,37 @@ include ('header.php')?>
                                 <span class="new-tasks-bottom-one">5+</span>
                             </div>
                         </div>
-                         <?php
-      }
-    }  ?> 
+                        <div class="card-upcoming-task-main-1">
+                            <div class="name-and-image row-myTasksNew">
+                                <img src="./img/Facbook.svg" alt="">
+                                <span class="name-and-website-myTasks">
+                                    <p>Facebook iOS UI design</p>
+                                    <span>www.facebook.com</span>
+                                </span>
                             </div>
-                </div>
-                </div>
-                         <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-      <script type="text/javascript" src="assets/js/materialize.js"></script>
-<script type="text/javascript">
-  function filteringmeal(){
-        var name = document.getElementById('name').value;
-        var position = document.getElementById('position').value;
-         var task = document.getElementById('task').value;
-       var location = document.getElementById('location').value;
-
-       $.post('config/filteringmeal.php', {name1:name,position1:position,task1:task,location1:location}, function(data){
-           $('#displayhere1').html(data);
-        });      
-  }
-</script>
+                            <div class="message-text-outline row-myTasksNew">
+                                <img src="./img/message-text-outline.svg" alt="">
+                                <span class="done">5 Days ago</span>
+                            </div>
+                            <div class="row-myTasksNew progressbar-parent ">
+                                <div class="progress-bar">
+                                    <span style="width: 100%;"></span>
+                                </div>
+                                <p>100%</p>
+                            </div>
+                            <div class="row-myTasksNew imagesfocard-1">
+                                <div class="images-bottom">
+                                    <img src="./img/Profile1.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                    <img src="./img/Profile4.png" alt="">
+                                    <img src="./img/Profile2.png" alt="">
+                                    <img src="./img/Profile3.png" alt="">
+                                </div>
+                                <span class="new-tasks-bottom-one">5+</span>
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>
         </div>
 </div>
-
-            
